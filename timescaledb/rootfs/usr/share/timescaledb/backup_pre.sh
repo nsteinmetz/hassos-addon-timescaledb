@@ -4,10 +4,8 @@
 # Pre-backup script - Creates a SQL dump before Home Assistant backup runs
 # ==============================================================================
 declare BACKUP_FILE
-declare POSTGRES_DATA
 
 BACKUP_FILE="/data/backup_db.sql"
-POSTGRES_DATA="/data/postgres"
 
 bashio::log.info "Starting pre-backup process..."
 
