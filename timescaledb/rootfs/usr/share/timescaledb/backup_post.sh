@@ -15,7 +15,7 @@ if [[ -f "${BACKUP_FILE}" ]]; then
         bashio::log.info "Backup SQL file removed successfully."
     else
         bashio::log.error "Failed to remove backup SQL file at ${BACKUP_FILE}"
-        return 1
+        exit 1
     fi
 else
     bashio::log.debug "No backup SQL file to clean up."

@@ -33,7 +33,7 @@ if pg_isready -U postgres -h localhost -p 5432 >/dev/null 2>&1; then
     else
         bashio::log.error "Failed to create database dump!"
         # Don't fail the backup process, just log the error
-        return 1
+        exit 1
     fi
 else
     bashio::log.warning "PostgreSQL is not running. Skipping database dump."
