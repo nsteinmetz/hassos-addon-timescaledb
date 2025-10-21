@@ -12,8 +12,8 @@ FROM timescale/timescaledb:2.22.1-pg17                                          
 
 # hadolint ignore=DL3007
 FROM ghcr.io/expaso/timescaledb/dependency/timescaledb-tools:latest                    AS timescaledb-tools
-FROM ghcr.io/expaso/timescaledb/dependency/pgagent-pg16:REL-4_2_3                      AS pgagent-pg16
-FROM ghcr.io/expaso/timescaledb/dependency/pgagent-pg17:REL-4_2_3                      AS pgagent-pg17
+FROM ghcr.io/expaso/timescaledb/dependency/pgagent-pg16:pgagent-4.2.3                  AS pgagent-pg16
+FROM ghcr.io/expaso/timescaledb/dependency/pgagent-pg17:pgagent-4.2.3                  AS pgagent-pg17
 FROM ghcr.io/expaso/timescaledb/dependency/postgis-pg16:3.6.0                          AS postgis-pg16
 FROM ghcr.io/expaso/timescaledb/dependency/postgis-pg17:3.6.0                          AS postgis-pg17
 FROM ghcr.io/expaso/timescaledb/dependency/timescaledb-toolkit-pg16:1.21.0             AS timescaledb-toolkit-pg16
@@ -43,13 +43,15 @@ RUN --mount=type=cache,id=apk-${TARGETARCH}-${TARGETVARIANT},sharing=locked,targ
         rsync \
         nano
 
+# Upgrade SSL libraries
+# hadolint ignore=DL3018
+RUN --mount=type=cache,id=apk-${TARGETARCH}-${TARGETVARIANT},sharing=locked,target=/var/cache/apk \
+    set -ex \
+    && apk add --upgrade libssl3 libcrypto3 openssl-dev
+
 ###########################################
 # Install all sub-components
 ###########################################
-
-# Make sure pg_config follows the most current version
-RUN rm /usr/bin/pg_config \
-    && ln -s /usr/libexec/postgresql/pg_config /usr/bin/pg_config
 
 # -----------------------------------------
 # PostgreSql 16 (old)
