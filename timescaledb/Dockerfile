@@ -20,7 +20,7 @@ FROM ghcr.io/expaso/timescaledb/dependency/timescaledb-toolkit-pg16:1.22.0      
 FROM ghcr.io/expaso/timescaledb/dependency/timescaledb-toolkit-pg17:1.22.0             AS timescaledb-toolkit-pg17
 FROM ghcr.io/expaso/timescaledb/dependency/postgresql-extension-system-stat-pg16:3.2   AS system-stat-pg16
 FROM ghcr.io/expaso/timescaledb/dependency/postgresql-extension-system-stat-pg17:3.2   AS system-stat-pg17
-FROM ghcr.io/expaso/timescaledb/dependency/pgvector-pg17:0.8.1                         AS pgvector-pg17
+FROM ghcr.io/expaso/timescaledb/dependency/pgvector-pg17:0.8.2                         AS pgvector-pg17
 
 
 ###########################################
@@ -112,7 +112,7 @@ COPY --from=postgis-pg16 --link /usr/local/share/postgresql/extension/postgis* /
 RUN --mount=type=cache,id=apk-${TARGETARCH}-${TARGETVARIANT},sharing=locked,target=/var/cache/apk \
     set -ex \
     && apk add  \
-        openexr \ 
+        openexr \
         poppler \
         gdal \
         geos \
@@ -120,13 +120,13 @@ RUN --mount=type=cache,id=apk-${TARGETARCH}-${TARGETVARIANT},sharing=locked,targ
         libgcc \
         libpq \
         libstdc++ \
-        libxml2 \ 
+        libxml2 \
         musl \
         pcre \
         perl \
         proj \
         protobuf-c
-        
+
 # hadolint ignore=DL3018
 RUN --mount=type=cache,id=apk-${TARGETARCH}-${TARGETVARIANT},sharing=locked,target=/var/cache/apk \
     set -ex \

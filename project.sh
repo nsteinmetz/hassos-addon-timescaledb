@@ -189,7 +189,7 @@ elif [ "$1" == "build-dependencies" ]; then
         build_dependency postgis-pg17 "3.6.2"
         build_dependency postgresql-extension-system-stat-pg16 "3.2"
         build_dependency postgresql-extension-system-stat-pg17 "3.2"
-        build_dependency pgvector-pg17 "0.8.1"        
+        build_dependency pgvector-pg17 "0.8.2"
     else
         printInColor "Building dependency $2.."
         build_dependency "$2" "$3"
