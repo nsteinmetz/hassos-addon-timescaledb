@@ -7,8 +7,8 @@ ARG ALPINE_VERSION=3.21
 # These images are all prebuild, otherwise building the docker images takes waaaay to long
 # Where possible, we just take the latest version from the Alpine repository, so it's
 # possible we won't mention the latest version here.
-FROM timescale/timescaledb:2.25.2-pg16                                          AS timescale-pg16
-FROM timescale/timescaledb:2.25.2-pg17                                          AS timescale-pg17
+FROM timescale/timescaledb:2.26.0-pg16                                          AS timescale-pg16
+FROM timescale/timescaledb:2.26.0-pg17                                          AS timescale-pg17
 
 # hadolint ignore=DL3007
 FROM ghcr.io/expaso/timescaledb/dependency/timescaledb-tools:latest                    AS timescaledb-tools
